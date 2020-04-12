@@ -43,7 +43,31 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="EventArgs\InvalidInputEventArgs.cs" />
+    <Compile Include="EventArgs\ScreenChangedEventArgs.cs" />
+    <Compile Include="EventArgs\ValidPathEventArgs.cs" />
+    <Compile Include="Interface\Constants.cs" />
+    <Compile Include="Interface\Screens\EndScreen.cs" />
+    <Compile Include="Interface\Screens\ErrorScreen.cs" />
+    <Compile Include="Interface\Screens\InfoScreen.cs" />
+    <Compile Include="Interface\InputProcessor.cs" />
+    <Compile Include="Interface\Screens\MainScreen.cs" />
+    <Compile Include="Interface\Screens\ProcessingScreen.cs" />
+    <Compile Include="Interface\Screens\_Screen.cs" />
+    <Compile Include="Interface\ScreenManagement\ScreenFactory.cs" />
+    <Compile Include="Interface\ScreenManagement\ScreenType.cs" />
+    <Compile Include="EventArgs\ScreenRequestedEventArgs.cs" />
+    <Compile Include="Interface\ScreenManagement\ScreenManager.cs" />
+    <Compile Include="MPObjects\GravityCenter.cs" />
+    <Compile Include="MPObjects\InertiaCordSys.cs" />
+    <Compile Include="MPObjects\InertiaTensor.cs" />
+    <Compile Include="MPObjects\InertiaTensorCordSys.cs" />
+    <Compile Include="MPObjects\InertiaTensorGravityCenter.cs" />
+    <Compile Include="MPObjects\MPData.cs" />
+    <Compile Include="MPObjects\PrincipalAxes.cs" />
+    <Compile Include="MPObjects\PrincipalMoments.cs" />
     <Compile Include="Program.cs" />
+    <Compile Include="ProgramState.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -60,8 +84,6 @@
       <EmbedInteropTypes>True</EmbedInteropTypes>
     </COMReference>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="MPObjects\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
