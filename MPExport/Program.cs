@@ -18,7 +18,7 @@ namespace MPExport
         private static void Initialize()
         {
             InputProcessor.Instance.ScreenChangeRequested += ScreenManager.Instance.OnScreenChangeRequested;
-            InputProcessor.Instance.InvalidInputEntered += ScreenManager.Instance.OnInvalidInputEntered;
+            InputProcessor.Instance.InvalidPathEntered += ScreenManager.Instance.OnInvalidPathEntered;
 
             InputProcessor.Instance.InputFilePathEntered += ProgramState.Instance.OnInputFilePathEntered;
             InputProcessor.Instance.OutputDirPathEntered += ProgramState.Instance.OnOutputDirPathEntered;

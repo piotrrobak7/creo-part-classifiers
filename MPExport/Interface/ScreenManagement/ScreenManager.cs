@@ -20,13 +20,12 @@ namespace MPExport.Interface
         {
             switch (e.Request)
             {
-                case var r when new Regex(@"[iI]").IsMatch(r): ChangeScreen(ScreenType.Info); break;
-                case var r when new Regex(@"[mM]").IsMatch(r): ChangeScreen(ScreenType.Main); break;
-                default: break;
+                case string r when new Regex("[iI]").IsMatch(r): ChangeScreen(ScreenType.Info); break;
+                case string r when new Regex("[mM]").IsMatch(r): ChangeScreen(ScreenType.Main); break;
             }
         }
 
-        public void OnInvalidInputEntered(object source, InvalidInputEventArgs e) =>
+        public void OnInvalidPathEntered(object source, InvalidPathEventArgs e) =>
             ChangeScreen(ScreenType.Error, e.ErrorMsg);
 
         #endregion

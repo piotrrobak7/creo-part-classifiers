@@ -2,9 +2,9 @@
 
 namespace MPExport
 {
-    class InvalidInputEventArgs : EventArgs
+    class InvalidPathEventArgs : EventArgs
     {
         public string ErrorMsg { get; }
-        public InvalidInputEventArgs(string errorMsg) => ErrorMsg = errorMsg;
+        public InvalidPathEventArgs(string errorMsg) => ErrorMsg = errorMsg;
     }
 }
