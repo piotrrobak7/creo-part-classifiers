@@ -67,6 +67,7 @@
     <Compile Include="MPObjects\PrincipalAxes.cs" />
     <Compile Include="MPObjects\PrincipalMoments.cs" />
     <Compile Include="Program.cs" />
+    <Compile Include="ProgramMode.cs" />
     <Compile Include="ProgramState.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

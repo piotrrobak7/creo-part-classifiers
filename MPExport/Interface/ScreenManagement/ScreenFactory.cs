@@ -10,7 +10,7 @@ namespace MPExport.Interface
             {
                 case ScreenType.Main: return new MainScreen();
                 case ScreenType.Info: return new InfoScreen();
-                case ScreenType.Error: return new ErrorScreen();
+                case ScreenType.Error: return new ErrorScreen(strings[0]);
                 case ScreenType.Processing: return new ProcessingScreen();
                 case ScreenType.End: return new EndScreen();
                 default: ThrowInvalidScreenTypeException(); return null;
@@ -19,7 +19,7 @@ namespace MPExport.Interface
 
         private static void ThrowInvalidScreenTypeException()
         {
-            string errorMsg = "Provided screen type is not implemented";
+            const string errorMsg = "Provided screen type is not implemented";
             throw new ArgumentException(errorMsg);
         }
     }

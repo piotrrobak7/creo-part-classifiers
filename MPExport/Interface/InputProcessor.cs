@@ -37,26 +37,54 @@ namespace MPExport.Interface
 
         public void Run(string input)
         {
-            if (ProgramState.Instance.ActiveScreenType == ScreenType.Error)
-            {
-                OnScreenChangeRequested("m");
-                return;
-            }
-
             input = input.Trim();
+
+            switch (ProgramState.Instance.Mode)
+            {
+                case ProgramMode.LoadingPaths: HandleLoadingPathsInput(input);  break;
+                case ProgramMode.ReturnToMain: HandleReturnToMainInput(); break;
+                case ProgramMode.Processing: HandleProcessingInput(input); break;
+                case ProgramMode.Ending: HandleEndingInput(input); break;
+            }
+        }
+
+        #region Loading paths
+
+        private void HandleLoadingPathsInput(string input)
+        {
             switch (input)
             {
-                case var i when new Regex(@"^[qQ]$").IsMatch(i): CloseApp(); break;
+                case var i when new Regex(@"^[qQ]$").IsMatch(i): Environment.Exit(0); break;
                 case var i when new Regex(@"^[sS]$").IsMatch(i): StartProcessing(); break;
                 case var i when new Regex(@"^[a-zA-Z]$").IsMatch(i): OnScreenChangeRequested(i); break;
                 default: ValidatePath(input); break;
             }
+
+            ProgramState.Instance.Screen.Display();
         }
-        
-        private void CloseApp() => Environment.Exit(0);
 
         private void StartProcessing() => throw new NotImplementedException();
 
         private void ValidatePath(string path) => throw new NotImplementedException();
+
+        #endregion
+
+        #region Return to main
+
+        private void HandleReturnToMainInput() => OnScreenChangeRequested("m");
+
+        #endregion
+
+        #region Processing
+
+        private void HandleProcessingInput(string input) => throw new NotImplementedException();
+
+        #endregion
+
+        #region Ending
+
+        private void HandleEndingInput(string input) => throw new NotImplementedException();
+
+        #endregion
     }
 }
