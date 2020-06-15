@@ -1,7 +1,4 @@
-﻿using System;
-using System.Text.RegularExpressions;
-
-namespace MPExport.Interface
+﻿namespace MPExport.Interface
 {
     sealed class ScreenManager
     {
@@ -10,40 +7,17 @@ namespace MPExport.Interface
         public static ScreenManager Instance { get; } = new ScreenManager();
 
         static ScreenManager() { }
-        private ScreenManager() { }
+        private ScreenManager() => _screenFactory = new ScreenFactory();
 
         #endregion
 
-        #region Event handlers
-
-        public void OnScreenChangeRequested(object source, ScreenRequestedEventArgs e)
+        private readonly ScreenFactory _screenFactory;
+        
+        public void ChangeScreen(ScreenType screenType, params string[] strings)
         {
-            switch (e.Request)
-            {
-                case string r when new Regex("[iI]").IsMatch(r): ChangeScreen(ScreenType.Info); break;
-                case string r when new Regex("[mM]").IsMatch(r): ChangeScreen(ScreenType.Main); break;
-            }
-        }
-
-        public void OnInvalidPathEntered(object source, InvalidPathEventArgs e) =>
-            ChangeScreen(ScreenType.Error, e.ErrorMsg);
-
-        #endregion
-
-        #region Event sender
-
-        public event EventHandler<ScreenChangedEventArgs> ScreenChanged;
-
-        private void OnScreenChanged(Screen screen) =>
-            ScreenChanged?.Invoke(null, new ScreenChangedEventArgs(screen));
-
-        #endregion
-
-        private void ChangeScreen(ScreenType screenType, params string[] strings)
-        {
-            var screen = ScreenFactory.Build(screenType, strings);
+            var screen = _screenFactory.Build(screenType, strings);
+            ProgramState.Instance.Screen = screen;
             screen.Display();
-            OnScreenChanged(screen);
         }
     }
 }

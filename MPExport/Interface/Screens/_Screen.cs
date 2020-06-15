@@ -38,7 +38,7 @@ namespace MPExport.Interface
         {
             string body = Body
                 .TrimStart()
-                .Replace("  ", String.Empty)
+                .Replace("  ", "")
                 .Replace(Constants.ScreenTextMarkup.ENTER, "\n")
                 .Replace(Constants.ScreenTextMarkup.TAB, "  ");
 

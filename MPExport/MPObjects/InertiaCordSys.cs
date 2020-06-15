@@ -2,7 +2,7 @@
 
 namespace MPExport.MPObjects
 {
-    public class InertiaCordSys : InertiaTensor
+    class InertiaCordSys : InertiaTensor
     {
         public InertiaCordSys(IpfcMassProperty massProps) : base(massProps)
         {

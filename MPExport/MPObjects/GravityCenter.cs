@@ -2,11 +2,11 @@
 
 namespace MPExport.MPObjects
 {
-    public class GravityCenter
+    class GravityCenter
     {
-        public double X { get; private set; }
-        public double Y { get; private set; }
-        public double Z { get; private set; }
+        public double X { get; }
+        public double Y { get; }
+        public double Z { get; }
 
         public GravityCenter(IpfcMassProperty massProps)
         {

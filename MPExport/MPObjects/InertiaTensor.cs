@@ -2,7 +2,7 @@
 
 namespace MPExport.MPObjects
 {
-    public abstract class InertiaTensor
+    abstract class InertiaTensor
     {
         public double Ixx { get; protected set; }
         public double Ixy { get; protected set; }

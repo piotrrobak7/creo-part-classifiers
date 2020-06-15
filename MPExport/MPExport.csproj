@@ -43,9 +43,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="EventArgs\InvalidInputEventArgs.cs" />
-    <Compile Include="EventArgs\ScreenChangedEventArgs.cs" />
-    <Compile Include="EventArgs\ValidPathEventArgs.cs" />
     <Compile Include="Interface\Constants.cs" />
     <Compile Include="Interface\Screens\EndScreen.cs" />
     <Compile Include="Interface\Screens\ErrorScreen.cs" />
@@ -56,7 +53,6 @@
     <Compile Include="Interface\Screens\_Screen.cs" />
     <Compile Include="Interface\ScreenManagement\ScreenFactory.cs" />
     <Compile Include="Interface\ScreenManagement\ScreenType.cs" />
-    <Compile Include="EventArgs\ScreenRequestedEventArgs.cs" />
     <Compile Include="Interface\ScreenManagement\ScreenManager.cs" />
     <Compile Include="MPObjects\GravityCenter.cs" />
     <Compile Include="MPObjects\InertiaCordSys.cs" />

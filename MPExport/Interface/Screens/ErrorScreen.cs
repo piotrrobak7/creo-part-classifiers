@@ -2,7 +2,7 @@
 
 namespace MPExport.Interface
 {
-    static partial class ScreenFactory
+    partial class ScreenFactory
     {
         private class ErrorScreen : Screen
         {

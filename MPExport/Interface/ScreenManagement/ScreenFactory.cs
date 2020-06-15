@@ -2,9 +2,15 @@
 
 namespace MPExport.Interface
 {
-    static partial class ScreenFactory
+    partial class ScreenFactory
     {
-        public static Screen Build(ScreenType screenType, params string[] strings)
+        public ScreenFactory()
+        {
+            if (ScreenManager.Instance != null) ThrowForbiddenInitializationException();
+            // This makes ScreenFactory a singleton
+        }
+
+        public Screen Build(ScreenType screenType, params string[] strings)
         {
             switch (screenType)
             {
@@ -17,9 +23,15 @@ namespace MPExport.Interface
             }
         }
 
-        private static void ThrowInvalidScreenTypeException()
+        private void ThrowInvalidScreenTypeException()
         {
-            const string errorMsg = "Provided screen type is not implemented";
+            const string errorMsg = "Provided screen type is not implemented!";
+            throw new ArgumentException(errorMsg);
+        }
+
+        private void ThrowForbiddenInitializationException()
+        {
+            const string errorMsg = "ScreenFactory object can exist only inside ScreenManager!";
             throw new ArgumentException(errorMsg);
         }
     }

@@ -3,28 +3,16 @@ using MPExport.Interface;
 
 namespace MPExport
 {
-    class Program
+    static class Program
     {
-        public static void Main(string[] args)
+        public static void Main()
         {
-            Initialize();
+            InputProcessor.Run("m");
             while (true)
             {
                 var input = Console.ReadLine();
-                InputProcessor.Instance.Run(input);
+                InputProcessor.Run(input);
             }
-        }
-
-        private static void Initialize()
-        {
-            InputProcessor.Instance.ScreenChangeRequested += ScreenManager.Instance.OnScreenChangeRequested;
-            InputProcessor.Instance.InvalidPathEntered += ScreenManager.Instance.OnInvalidPathEntered;
-
-            InputProcessor.Instance.InputFilePathEntered += ProgramState.Instance.OnInputFilePathEntered;
-            InputProcessor.Instance.OutputDirPathEntered += ProgramState.Instance.OnOutputDirPathEntered;
-            ScreenManager.Instance.ScreenChanged += ProgramState.Instance.OnScreenChanged;
-
-            InputProcessor.Instance.Run("m");
         }
     }
 }

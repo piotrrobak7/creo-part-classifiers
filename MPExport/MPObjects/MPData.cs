@@ -2,23 +2,23 @@
 
 namespace MPExport.MPObjects
 {
-    public class MPData
+    class MPData
     {
-        public string PartNo { get; private set; }
+        public string PartNo { get; }
 
-        public double Mass { get; private set; }
-        public double Volume { get; private set; }
-        public double Density { get; private set; }
-        public double SurfaceArea { get; private set; }
+        public double Mass { get; }
+        public double Volume { get; }
+        public double Density { get; }
+        public double SurfaceArea { get; }
 
-        public GravityCenter GravityCenter { get; private set; }
+        public GravityCenter GravityCenter { get; }
 
-        public InertiaCordSys InertiaCordSys { get; private set; }
-        public InertiaTensorCordSys InertiaTensorCordSys { get; private set; }
-        public InertiaTensorGravityCenter InertiaTensorGravityCenter { get; private set; }
+        public InertiaCordSys InertiaCordSys { get; }
+        public InertiaTensorCordSys InertiaTensorCordSys { get; }
+        public InertiaTensorGravityCenter InertiaTensorGravityCenter { get; }
 
-        public PrincipalMoments PrincipalMoments { get; private set; }
-        public PrincipalAxes PrincipalAxes { get; private set; }
+        public PrincipalMoments PrincipalMoments { get; }
+        public PrincipalAxes PrincipalAxes { get; }
 
         public MPData(string partNo, IpfcMassProperty massProps)
         {

@@ -2,19 +2,19 @@
 
 namespace MPExport.MPObjects
 {
-    public class PrincipalAxes
+    class PrincipalAxes
     {
-        public double X1 { get; private set; }
-        public double Y1 { get; private set; }
-        public double Z1 { get; private set; }
+        public double X1 { get; }
+        public double Y1 { get; }
+        public double Z1 { get; }
 
-        public double X2 { get; private set; }
-        public double Y2 { get; private set; }
-        public double Z2 { get; private set; }
+        public double X2 { get; }
+        public double Y2 { get; }
+        public double Z2 { get; }
 
-        public double X3 { get; private set; }
-        public double Y3 { get; private set; }
-        public double Z3 { get; private set; }
+        public double X3 { get; }
+        public double Y3 { get; }
+        public double Z3 { get; }
 
         public PrincipalAxes(IpfcMassProperty massProps)
         {

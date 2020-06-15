@@ -2,7 +2,7 @@
 
 namespace MPExport.MPObjects
 {
-    public class InertiaTensorGravityCenter : InertiaTensor
+    class InertiaTensorGravityCenter : InertiaTensor
     {
         public InertiaTensorGravityCenter(IpfcMassProperty massProps) : base(massProps)
         {
