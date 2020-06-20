@@ -1,7 +1,6 @@
 ﻿using System;
-using System.IO;
-using System.Security;
 using System.Text.RegularExpressions;
+using MPExport.FileProcessing;
 
 namespace MPExport.Interface
 {
@@ -24,13 +23,24 @@ namespace MPExport.Interface
 
         private static void HandleLoadingPathsInput(string input)
         {
-            switch (input)
+            if (ProgramState.Instance.ReadyForProcessing)
             {
-                case string i when new Regex("^[sS]$").IsMatch(i): StartProcessing(); break;
-                case string i when new Regex("^[rR]$").IsMatch(i): ResetPaths(); break;
-                case string i when new Regex("^[iI]$").IsMatch(i): ScreenManager.Instance.ChangeScreen(ScreenType.Info); break;
-                case string i when new Regex("^[qQ]$").IsMatch(i): Environment.Exit(0); break;
-                default: ValidatePath(input); break;
+                switch (input)
+                {
+                    case string i when new Regex("^[sS]$").IsMatch(i): StartProcessing(); break;
+                    case string i when new Regex("^[rR]$").IsMatch(i): ResetPaths(); break;
+                    case string i when new Regex("^[iI]$").IsMatch(i): ScreenManager.Instance.ChangeScreen(ScreenType.Info); break;
+                    case string i when new Regex("^[qQ]$").IsMatch(i): Environment.Exit(0); break;
+                }
+            }
+            else
+            {
+                switch (input)
+                {
+                    case string i when new Regex("^[iI]$").IsMatch(i): ScreenManager.Instance.ChangeScreen(ScreenType.Info); break;
+                    case string i when new Regex("^[qQ]$").IsMatch(i): Environment.Exit(0); break;
+                    default: ValidatePath(input); break;
+                }
             }
 
             ProgramState.Instance.Screen.Display();
@@ -38,63 +48,31 @@ namespace MPExport.Interface
 
         private static void StartProcessing()
         {
-            if (!ProgramState.Instance.ReadyForProcessing) return;
-
             throw new NotImplementedException();
         }
 
         private static void ResetPaths()
         {
-            if (!ProgramState.Instance.ReadyForProcessing) return;
-
             ProgramState.Instance.InputFilePath = null;
             ProgramState.Instance.OutputDirPath = null;
         }
 
         private static void ValidatePath(string path)
         {
-            string errorMsg = null;
+            ValidationResult result = null;
 
-            if (path.Length > 0 && path[0] == '"' && path[path.Length - 1] == '"')
+            if (ProgramState.Instance.InputFilePath == null)
             {
-                path = path.Remove(0, 1);
-                path = path.Remove(path.Length - 1);
+                result = PathValidator.ValidateInputFilePath(path);
+                ProgramState.Instance.InputFilePath = result.Valid ? path : null;
+            }
+            else
+            {
+                result = PathValidator.ValidateOutputDirPath(path);
+                ProgramState.Instance.OutputDirPath = result.Valid ? path : null;
             }
 
-            try { Path.GetFullPath(path); }
-            catch (ArgumentException) { errorMsg = Constants.PathErrors.INVALID_CHARS_OR_EMPTY; }
-            catch (SecurityException) { errorMsg = Constants.PathErrors.NO_ACCESS; }
-            catch (NotSupportedException) { errorMsg = Constants.PathErrors.INVALID_CHARS_OR_EMPTY; }
-            catch (PathTooLongException) { errorMsg = Constants.PathErrors.PATH_TO_LONG; }
-
-            if (errorMsg == null && !Path.IsPathRooted(path)) errorMsg = Constants.PathErrors.PATH_NOT_ROOTED;
-            if (errorMsg != null)
-            {
-                ScreenManager.Instance.ChangeScreen(ScreenType.Error, errorMsg);
-                return;
-            }
-
-            if (ProgramState.Instance.InputFilePath == null) ValidateInputFilePath(path);
-            else ValidateOutputDirPath(path);
-        }
-
-        private static void ValidateInputFilePath(string path)
-        {
-            switch (Path.GetExtension(path))
-            {
-                case "": ScreenManager.Instance.ChangeScreen(ScreenType.Error, Constants.PathErrors.INPUT_FILE_FIRST); break;
-                case Constants.AllowedExtensions.TXT: ProgramState.Instance.InputFilePath = path; break;
-                default: ScreenManager.Instance.ChangeScreen(ScreenType.Error, Constants.PathErrors.INVALID_FILE_TYPE); break;
-            }
-        }
-
-        private static void ValidateOutputDirPath(string path)
-        {
-            switch (Path.GetExtension(path))
-            {
-                case "": ProgramState.Instance.OutputDirPath = path; break;
-                default: ScreenManager.Instance.ChangeScreen(ScreenType.Error, Constants.PathErrors.NOT_DIRECTORY); break;
-            }
+            if (!result.Valid) ScreenManager.Instance.ChangeScreen(ScreenType.Error, result.Message);
         }
 
         #endregion
