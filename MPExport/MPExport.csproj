@@ -44,6 +44,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Interface\Constants.cs" />
+    <Compile Include="Interface\Screens\FatalErrorScreen.cs" />
     <Compile Include="Interface\Screens\EndScreen.cs" />
     <Compile Include="Interface\Screens\ErrorScreen.cs" />
     <Compile Include="Interface\Screens\InfoScreen.cs" />

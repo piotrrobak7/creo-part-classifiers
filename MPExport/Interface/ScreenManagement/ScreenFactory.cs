@@ -17,6 +17,7 @@ namespace MPExport.Interface
                 case ScreenType.Main: return new MainScreen();
                 case ScreenType.Info: return new InfoScreen();
                 case ScreenType.Error: return new ErrorScreen(strings[0]);
+                case ScreenType.FatalError: return new FatalErrorScreen(strings[0], strings[1]);
                 case ScreenType.Processing: return new ProcessingScreen();
                 case ScreenType.End: return new EndScreen();
                 default: ThrowInvalidScreenTypeException(); return null;

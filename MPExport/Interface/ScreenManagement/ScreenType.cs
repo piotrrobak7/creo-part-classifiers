@@ -5,6 +5,7 @@
         Main,
         Info,
         Error,
+        FatalError,
         Processing,
         End
     }

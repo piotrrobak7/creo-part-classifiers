@@ -7,7 +7,20 @@ namespace MPExport
     {
         public static void Main()
         {
-            InputProcessor.Run("m");
+            try
+            {
+                InputProcessor.Run("m");
+                WaitForInput();
+            }
+            catch (Exception ex)
+            {
+                ScreenManager.Instance.ChangeScreen(ScreenType.FatalError, ex.Message, ex.StackTrace);
+                Console.ReadLine();
+            }
+        }
+
+        private static void WaitForInput()
+        {
             while (true)
             {
                 var input = Console.ReadLine();
